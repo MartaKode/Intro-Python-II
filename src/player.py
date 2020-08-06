@@ -8,6 +8,7 @@ class Player:
         self.current_room = current_room
 
         self.item_backpack = []
+        
     
     def get_item(self, item):
         self.item_backpack.append(item)

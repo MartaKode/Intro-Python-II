@@ -171,8 +171,31 @@ def adventure_game():
 
         elif command[0] == 'i' or command[0] == 'inventory':
             player.open_backpack()
-            # backpack_choice = input('Drop items or continue')
-             
+
+            backpack_choice = input('Drop [drop] items or continue [pass] \n>>  ')
+            if backpack_choice == 'pass':
+                pass
+            elif backpack_choice == 'drop':
+                drop_items = [f'[drop {item.name}]' for item in player.item_backpack]
+                def drop_command(drop_items):
+                    for i in drop_items:
+                        print(i)
+                        
+                drop_command(drop_items)
+                choice = input('>>  ').lower().split(' ')
+                if choice[0] == 'drop':
+                    for item in player.item_backpack:
+                        if choice[1] == item.name.lower():
+                            player.drop_item(item)
+                            player.current_room.add_item(item)
+                            break
+                        elif choice[1] not in player.item_backpack:
+                            print('No such item in your backpack. Moving on..')
+                            break
+                else:
+                    pass
+            else: 
+                pass
 
         else:
             print(f'\n****⚠️  Wrong command: "{command}"...Try again?⚠️  ****\n')
